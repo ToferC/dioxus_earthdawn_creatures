@@ -1,0 +1,13 @@
+/target
+/playwright-tests/web/dist
+/playwright-tests/fullstack/dist
+/dist
+Cargo.lock
+.DS_Store
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+tarpaulin-report.html
