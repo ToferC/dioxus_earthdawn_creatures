@@ -8,7 +8,6 @@ use surrealdb::engine::remote::ws::Ws;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Creature {
-    pub id: Uuid,
     pub creature_name: String,
     pub found_in: Vec<Locales>,
     pub rarity: Rarity,
@@ -34,6 +33,42 @@ pub struct Creature {
     pub image_url: String,
     pub created_at: NaiveDateTime,
     pub updated_at: NaiveDateTime,
+}
+
+impl Creature {
+    pub fn default() -> Self {
+
+        let locales = vec![Locales::Jungle];
+        let today = chrono::Utc::now().naive_utc();
+
+        Creature {
+            creature_name: "Esparaga".to_string(),
+            found_in: locales,
+            rarity: Rarity::Rare,
+            circle_rank: 5,
+            dex: 10,
+            strength: 10,
+            con: 10,
+            per: 10,
+            wil: 10,
+            cha: 10,
+            initiative: 10,
+            pd: 9,
+            md: 9,
+            sd: 9,
+            pa: 9,
+            ma: 9,
+            unconsciousness_rating: 45,
+            death_rating: 55,
+            wound: 12,
+            knockdown: 10,
+            actions: 2,
+            recovery_rolls: 3,
+            image_url: "hdahdksfashf".to_string(),
+            created_at: today,
+            updated_at: today,
+        }
+    }
 }
 
 
