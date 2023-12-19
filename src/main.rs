@@ -5,6 +5,7 @@ use dioxus_demo::models::Creature;
 use dioxus_fullstack::prelude::*;
 use serde::Deserialize;
 use surrealdb::engine::remote::ws::{Ws, Client};
+use surrealdb::opt::PatchOp;
 use surrealdb::opt::auth::Root;
 use surrealdb::Surreal;
 use surrealdb::sql::Thing;
@@ -42,11 +43,19 @@ async fn main() -> surrealdb::Result<()> {
 
     dbg!(updated);
 
-    let mut creatures: Vec<Creature> = DB
-        .select("creature")
+    let creature: Option<Creature> = DB
+        .select(("creature", "zgzecnypuqlztg8fke9i"))
         .await?;
 
-    println!("{:?}", creatures);
+    println!("{:?}", creature);
+
+    let update: Option<Creature> = DB
+        .update(("creature", "zgzecnypuqlztg8fke9i"))
+        .patch(PatchOp::replace("/creature_name", "Zombie"))
+        .patch(PatchOp::replace("/dex", 14))
+        .await?;
+
+        println!("{:?}", update);
 
     LaunchBuilder::new(App).launch();
 
