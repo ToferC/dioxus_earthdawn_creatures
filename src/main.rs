@@ -47,7 +47,7 @@ async fn main() -> surrealdb::Result<()> {
         .select(("creature", "zgzecnypuqlztg8fke9i"))
         .await?;
 
-    println!("{:?}", creature);
+    dbg!(creature);
 
     let update: Option<Creature> = DB
         .update(("creature", "zgzecnypuqlztg8fke9i"))
@@ -55,7 +55,7 @@ async fn main() -> surrealdb::Result<()> {
         .patch(PatchOp::replace("/dex", 14))
         .await?;
 
-        println!("{:?}", update);
+    dbg!(update);
 
     LaunchBuilder::new(App).launch();
 
@@ -64,11 +64,11 @@ async fn main() -> surrealdb::Result<()> {
 
 pub fn App(cx: Scope) -> Element {
     render! {
-        StoryListing{}
+        CreatureListing{}
     }
 }
 
-pub fn StoryListing(cx: Scope) -> Element {
+pub fn CreatureListing(cx: Scope) -> Element {
     let title = "title";
     let by = "author";
     let score = 0;
