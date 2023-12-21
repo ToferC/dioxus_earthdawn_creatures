@@ -1,5 +1,6 @@
 #![allow(non_snake_case, unused)]
 
+use dioxus::html::table;
 use dioxus::prelude::*;
 use dioxus_demo::models::Creature;
 use dioxus_fullstack::prelude::*;
@@ -44,13 +45,13 @@ async fn main() -> surrealdb::Result<()> {
     dbg!(updated);
 
     let creature: Option<Creature> = DB
-        .select(("creature", "zgzecnypuqlztg8fke9i"))
+        .select(("creature", "niix938m9xftq71aiqkl"))
         .await?;
 
     dbg!(creature);
 
     let update: Option<Creature> = DB
-        .update(("creature", "zgzecnypuqlztg8fke9i"))
+        .update(("creature", "niix938m9xftq71aiqkl"))
         .patch(PatchOp::replace("/creature_name", "Zombie"))
         .patch(PatchOp::replace("/dex", 14))
         .await?;
@@ -64,22 +65,24 @@ async fn main() -> surrealdb::Result<()> {
 
 pub fn App(cx: Scope) -> Element {
     render! {
-        CreatureListing{}
+        CreatureListing{
+            creature: Creature::default()
+        }
     }
 }
 
-pub fn CreatureListing(cx: Scope) -> Element {
-    let title = "title";
-    let by = "author";
-    let score = 0;
-    let time = chrono::Utc::now();
-    let comments = "comments";
+#[component]
+pub fn CreatureListing(cx: Scope, creature: Creature) -> Element {
 
     render! {
         div {
             padding: "0.5rem",
             position: "relative",
-            "{title} by {by} ({score}) {time} {comments}"
+
+            "{creature.creature_name}"
+            table {
+                print!("{:?}", creature)
+            }
         }
     }
 }

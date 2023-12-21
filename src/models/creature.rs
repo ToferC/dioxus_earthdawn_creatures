@@ -6,7 +6,7 @@ use surrealdb::engine::remote::ws::Ws;
 
 
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, PartialOrd)]
 pub struct Creature {
     pub creature_name: String,
     pub found_in: Vec<Locales>,
@@ -129,7 +129,7 @@ impl Creature {
 
 
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, PartialOrd)]
 pub enum Rarity {
     Common,
     Uncommon,
@@ -137,7 +137,7 @@ pub enum Rarity {
     Unique,
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, PartialOrd)]
 pub enum Locales {
     Jungle,
     Desert,
