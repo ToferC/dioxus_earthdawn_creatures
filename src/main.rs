@@ -45,13 +45,13 @@ async fn main() -> surrealdb::Result<()> {
     dbg!(updated);
 
     let creature: Option<Creature> = DB
-        .select(("creature", "niix938m9xftq71aiqkl"))
+        .select(("creature", "ey24zbzzy28zoim9txmy"))
         .await?;
 
     dbg!(creature);
 
     let update: Option<Creature> = DB
-        .update(("creature", "niix938m9xftq71aiqkl"))
+        .update(("creature", "ey24zbzzy28zoim9txmy"))
         .patch(PatchOp::replace("/creature_name", "Zombie"))
         .patch(PatchOp::replace("/dex", 14))
         .await?;
